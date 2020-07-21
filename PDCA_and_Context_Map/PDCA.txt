@@ -1,0 +1,53 @@
+function decodeBarcodes
+P: 10 min
+D: 2 min
+C: 无
+A: 无
+
+function isValidBarcode
+P: 2 min
+D: 2 min
+C: 无
+A: 无
+
+function getAllItems
+P: 5 min
+D: 4 min
+C: 没有看清需求，一开始获取了错误的结果
+A: 做好需求澄清，通过输入的barcodes获得items
+
+function getReceiptMessages
+P: 20 min
+D: 5 min
+C: 无
+A: 无
+
+function countQuantity
+P: 20 min
+D: 47 min
+C: 思考如何合并重复的item花费了较多时间
+A: 确定一个想法或方法后坚定的执行，不要老是写道 一半就换思路
+
+function countUnitPrice
+P: 3 min
+D: 1 min
+C: 无
+A: 无
+
+function countSubtotal
+P: 8 min
+D: 1 min
+C: 无
+A: 无
+
+function generateReceipt
+P: 10 min
+D: 8 min
+C: 输出时在文本格式调整上花费了时间
+A: 以复制方式复制固定文本
+
+Total Task
+P: 80 min
+D: 83 min
+C: 主要时间都花费在了数据合并的实现与输出时文本格式的调整
+A: 确定好思路与方法再进行编码
