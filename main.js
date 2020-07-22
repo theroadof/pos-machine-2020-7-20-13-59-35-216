@@ -1,6 +1,6 @@
 function printReceipt(barcodes) {
-    var items = decodeBarcodes(barcodes);
-    var receipt = generateReceipt(getReceiptMessages(items));
+    const items = decodeBarcodes(barcodes);
+    const receipt = generateReceipt(getReceiptMessages(items));
     console.log(receipt);
 }
 
@@ -13,15 +13,12 @@ function decodeBarcodes(barcodes){
 }
 
 function isValidBarcode(barcodes){
-    if(barcodes.length>0){
-        return true;
-    }else{
-        return false;
-    }
+    const result = barcodes.length>0?true:false;
+    return result;
 }
 
 function getAllItems(barcodes){
-    var data = [
+    const data = [
         {
            barcode: 'ITEM000000',
            name: 'Coca-Cola',
@@ -76,24 +73,25 @@ function getReceiptMessages(items){
 
 function countQuantity(items){
     var new_items = [];
-    new_items.push(items[0]);
-    new_items[0]['quantity']=1;
-    var pushFlag;
-    for(let i=1;i<items.length;i++){
-        for(let j=0;j<new_items.length;j++){
-            if(items[i].barcode==new_items[j].barcode){
-                new_items[j].quantity++;
-                pushFlag=false;
-                break;
-            }else{
-                pushFlag=true;
-            }
+    var pushFlag=0;
+    items.sort((a,b)=>{
+        if(a.barcode>b.barcode){
+            return 1;
+        }else{
+            return 0;
         }
-        if(pushFlag){
-            new_items.push(items[i]);
-            new_items[new_items.length-1]['quantity']=1;
+    })
+    for(let i=1;i<items.length;i++){
+        if(items[i].barcode!==items[i-1].barcode){
+            let item = items[i-1];
+            item['quantity']=i-pushFlag;
+            new_items.push(item);
+            pushFlag=i;
         }
     }
+    let item = items[items.length-1];
+    item['quantity']=items.length-pushFlag;
+    new_items.push(item);
     return new_items;
 }
 
