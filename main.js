@@ -1,6 +1,6 @@
 function printReceipt(barcodes) {
     const items = decodeBarcodes(barcodes);
-    const receipt = generateReceipt(getReceiptMessages(items));
+    const receipt =(items===null)?null:generateReceipt(getReceiptMessages(items));
     console.log(receipt);
 }
 
@@ -108,13 +108,17 @@ function generateReceipt(receiptMessages){
     receipt.push("\n***<store earning no money>Receipt ***");
     for(let i=0;i<receiptMessages.length;i++){
         total+=receiptMessages[i].subtotal;
-        receipt.push('Name: '+receiptMessages[i].name+', Quantity: '+receiptMessages[i].quantity+
-            ', Unit price: '+receiptMessages[i].unitPrice+' (yuan), Subtotal: '+receiptMessages[i].subtotal+' (yuan)');    
+        receipt.push(generateItemReceipt(receiptMessages[i]));
     }
     receipt.push('----------------------');
     receipt.push(`Total: ${total} (yuan)`);
     receipt.push('**********************');
     return receipt.join('\n');
+}
+
+function generateItemReceipt(receiptMessage){
+    return ('Name: '+receiptMessage.name+', Quantity: '+receiptMessage.quantity+
+            ', Unit price: '+receiptMessage.unitPrice+' (yuan), Subtotal: '+receiptMessage.subtotal+' (yuan)');
 }
 
 module.exports = {
